@@ -1,24 +1,47 @@
-import logo from './logo.svg';
+import {Gantt, ViewMode} from 'gantt-task-react';
+import {useGanttTaskReactAdapter} from '@consta/gantt-task-react-adapter/useGanttTaskReactAdapter';
+import {data} from "./data";
 import './App.css';
 
+const getTasks = (data) => {
+  const tasks = [];
+  data.forEach((item) => {
+    const dateFrom = new Date(item.dateFrom);
+    const dateTo = new Date(item.dateTo);
+    if (dateFrom <= dateTo) {
+      tasks.push({
+        id: item.id,
+        name: '',
+        type: 'task',
+        start: new Date(item.dateFrom),
+        end: new Date(item.dateTo),
+        progress: 100,
+        styles: {
+          progressColor: item.background,
+        },
+      });
+    }
+  });
+  return tasks;
+};
+
 function App() {
+  const styleOptions = useGanttTaskReactAdapter({});
+  const tasks = getTasks(data);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {tasks.length !== 0 && <Gantt
+        {...styleOptions}
+        tasks={tasks}
+        viewMode={ViewMode.Month}
+        todayColor="none"
+        listCellWidth=""
+        columnWidth={80}
+        headerHeight={80}
+        locale="en"
+      />}
+    </>
   );
 }
 
