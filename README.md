@@ -13,6 +13,6 @@ https://kirsawka.github.io/react-gantt/
    `npm start`
    
    ----
-   Использовано:
+   В проекте используется:
    - библиотека gantt-task-react
    - адаптер Consta gantt-task-react-adapter для диаграммы Ганта библиотеки gantt-task-react
