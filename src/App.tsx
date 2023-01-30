@@ -1,16 +1,17 @@
-import {Gantt, ViewMode} from 'gantt-task-react';
+import {Gantt, ViewMode, Task} from 'gantt-task-react';
 import {useGanttTaskReactAdapter} from '@consta/gantt-task-react-adapter/useGanttTaskReactAdapter';
 import {data} from "./data";
+import {Data} from "./types";
 import './App.css';
 
-const getTasks = (data) => {
-  const tasks = [];
+const getTasks = (data: Data[]) => {
+  const tasks: Task[] = [];
   data.forEach((item) => {
     const dateFrom = new Date(item.dateFrom);
     const dateTo = new Date(item.dateTo);
     if (dateFrom <= dateTo) {
       tasks.push({
-        id: item.id,
+        id: String(item.id),
         name: '',
         type: 'task',
         start: new Date(item.dateFrom),

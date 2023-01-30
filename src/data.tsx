@@ -1,4 +1,6 @@
-export const data = [
+import {Data} from "./types";
+
+export const data: Data[] = [
   {
     id: 1,
     dateFrom: 'Wed, 01 Oct 2019 07:59:00 GMT',
